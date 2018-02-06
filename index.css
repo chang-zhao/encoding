@@ -1,4 +1,4 @@
-h3 {
+h3, p {
     margin: 0;
     padding: 1em;
     text-align: center;
@@ -22,12 +22,20 @@ hr {
 }
 .table {
     display: table-row;
+    padding: 1em;
 }
 .table div {
     display: table-cell;
+    padding: 0;
 }
 .table span {
     display: block;
+    padding: 4px 1em;
+    border: 1px solid transparent;
+    height: 1em !important;
+}
+.table span:nth-child(odd) {
+    background-color: #F8F8F8;
 }
 #write {
     position: fixed;
@@ -35,9 +43,48 @@ hr {
     right: 1em;
     z-index: 1000;
 }
+/*
 #files {
-    background-color: #D6FAF8;
+    background-color: #DBFFFD;
 }
 #files2 {
-    background-color: antiquewhite;
+    background-color: #FDFFDF;
+}
+*/
+#files .folder {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: blue;
+}
+#files .folder:hover {
+    background-color: #EBFAF4;
+    border: 1px solid mediumaquamarine;
+}
+.table span.conv {
+    color: white;
+    text-shadow: 0 0 1px #000;
+    background-color: #99D424;
+    border-radius: 1em;
+    padding: 0 4px 8px;
+    font-family: "Arial Black",sans-serif;
+    box-shadow: 0 0 1px #88BF24 inset;
+    border-color: white;
+    cursor: pointer;
+    max-height: 1em;
+}
+.table span.del {
+    color: white;
+    text-shadow: 0 0 1px #000;
+    background-color: #FF8080;
+    border-radius: 1em;
+    padding: 2px 10px 6px;
+    font-family: "Arial Black",sans-serif;
+    box-shadow: 0 0 1px #FF0000 inset;
+    border-color: white;
+    cursor: pointer;
+    max-height: 1em;
+}
+.table span.blank {
+    padding: 0 4px 8px;
+    /*    padding: 0; */
 }
