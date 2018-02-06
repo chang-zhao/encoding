@@ -1,0 +1,43 @@
+h3 {
+    margin: 0;
+    padding: 1em;
+    text-align: center;
+    background-color: aliceblue;
+}
+hr {
+    border: 1px dashed #ffe4c4;
+}
+.header div {
+/*  float: left;
+    width: 30%;
+    border: 1px solid #336699; */
+    display: inline;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 0.5em;
+    background-color: #FFF2E8;
+}
+.header div:first-child {
+    background-color: #E0FFDA;
+}
+.table {
+    display: table-row;
+}
+.table div {
+    display: table-cell;
+}
+.table span {
+    display: block;
+}
+#write {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    z-index: 1000;
+}
+#files {
+    background-color: #D6FAF8;
+}
+#files2 {
+    background-color: antiquewhite;
+}
