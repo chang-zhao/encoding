@@ -92,17 +92,18 @@ if ($ready == 15 && $_REQUEST['convert'] == "go") {
     $list2 = file($outFile, FILE_IGNORE_NEW_LINES);
 //    array_multisort(array_map('strlen', $list1), SORT_DESC, $list1, $list2, $stat1);
     for($i=0; $i<count($list1); $i++) {
-        echo '<p class="deb">' . $list2[$i] . ' &rarr; ' . $list1[$i] . '</p>' . PHP_EOL;
         if ($list1[$i] == $list2[$i]) continue;
+        echo '<p class="deb">' . $list2[$i] . ' &rarr; ' . $list1[$i] . '</p>' . PHP_EOL;
         rename(str_replace('\\', '\\', B.$list2[$i]), str_replace('\\', '\\', B.$list1[$i]));
 
-        if ($stat1[0] == DIRECTORY_SEPARATOR)		// is_dir
+        if ($stat1[0] == DIRECTORY_SEPARATOR)		// is_dir => after dir rename its paths have changed
             $list2 = str_replace($list2[$i] . DIRECTORY_SEPARATOR, $list1[$i] . DIRECTORY_SEPARATOR, $list2);
     }
-    die('<hr>'. $i);
+    die('<hr>'. $i);      // = total files processed
 }
 
 // Otherwise prepare "submit"
+
 // Compare files' stats, to prevent mistaken renaming
 
 $stat2 = file($outStat, FILE_IGNORE_NEW_LINES);
@@ -110,7 +111,7 @@ $i = 0;
 $diffs = array();
 foreach($stat1 as $s) {
     if ($s == $stat2[$i++]) continue;
-    $diffs[] = $i - 1;
+    $diffs[] = $i - 1;                  // in which lines files are different
 }
 
 // if file stats are all equal, perhaps it's safe to rename
@@ -118,6 +119,12 @@ foreach($stat1 as $s) {
 if (empty($diffs)) echo "<p>OK, files and new names seem to be corresponding (by filesize & timestamp).</p>";
 else die("<p class='warn'>Differences in file size/timestamp were detected. Files' correlations can be wrong.</p>");
 
+/**
+ * Lists all files and dirs under the path
+ * @param $dir <= path to list
+ * global $arr => array of file/dir names
+ * global $brr => array of filesizes & timestamps
+ */
 function dirToArray($dir) {
     global $arr, $brr;
     $cdir = array_diff(scandir($dir, SCANDIR_SORT_NONE), array('..', '.'));
