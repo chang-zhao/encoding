@@ -13,20 +13,20 @@ To convert them to human-readable UTF-8, as PHP 7.1+ writes, this tool should be
 
 On each run it creates two file listings. On the first run:
 
-  * list1.txt - a list of (old style) file names, with paths
+  * list1.txt - a list of (human-readable) file names, with paths
   * stat1.txt - a list of sizes and timestamps for those files
 
 On the second run it creates:
 
-  * list2.txt - a list of (new style) file names, with paths
-  * stat2.txt - should be equal to stat1.txt, as basic error prevention
+  * list2.txt - a list of (actual, read in new way) file names, with paths
+  * stat2.txt (should be equal to stat1.txt, it's for basic error prevention)
 
 Then it compares stat1.txt and stat2.txt, string by string.
 
 If they are equal, it means that the files still remain the same as during the first run.
 
-Then it renames files with non-ASCII names (like "РєСѓР»РёРЅР°СЂРёСЏ.txt", listed in list1.txt)
-with corresponding lines from list1.txt (where it was read by older PHP and so was human-readable there).
+Then it renames files with non-ASCII names (like "РєСѓР»РёРЅР°СЂРёСЏ.txt", listed in list2.txt)
+with corresponding lines from list1.txt (where it was read by older PHP and so was human-readable).
 
 (Similarly you can rename files the other way round: run 1st in a new PHP, 2nd time in an old PHP.)
 
