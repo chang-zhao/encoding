@@ -37,6 +37,23 @@ if (file_exists($outStat1)) {   // if old file stats listed => list new ones
     if (file_exists($outStat)) $ready += 8;
 } else $outStat = $outStat1;
 
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style type="text/css">
+.warn{ color: #A00000; }
+.deb { color: #6666CC; }
+    </style>
+</head>
+<body>
+<?php
+
+$s = '<p>Path: ';
+foreach($dirPath as $p) $s .= $p . ', ';
+echo rtrim($s, ', ') . '</p>' . PHP_EOL;
+
 if ($ready < 15) {      // flag: 0 = no files; 3 = 1st pair exists; 15 = both pairs exist
 
     // list the files - and save the list (names + stats) into a pair of files
@@ -65,19 +82,6 @@ if ($ready < 15) {      // flag: 0 = no files; 3 = 1st pair exists; 15 = both pa
 // If no pairs of files existed already - having created the 1st pair, we done for now
 
 if ($ready < 3) die();
-
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <style type="text/css">
-.warn{ color: #A00000; }
-.deb { color: #6666CC; }
-    </style>
-</head>
-<body>
-<?php
 
 $stat1 = file($outStat1, FILE_IGNORE_NEW_LINES);
 
@@ -131,11 +135,6 @@ function dirToArray($dir) {
 
 ?>
 <hr>
-<?php
-$s = 'Path: ';
-foreach($dirPath as $p) $s .= $p . ', ';
-echo rtrim($s, ', ') . PHP_EOL;
-?>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <input type="hidden" name="convert" id="convert" value="go">
     <input type="submit" value="Convert files' names">
